@@ -178,18 +178,22 @@ public class TypeHandler
 
     /**
      * Returns the date represented by <code>str</code>.
-     * <p>
-     * This method is not yet implemented and always throws an
-     * {@link UnsupportedOperationException}.
      *
      * @param str the date string
-     * @return The date if <code>str</code> is a valid date string,
-     * otherwise return null.
-     * @throws UnsupportedOperationException always
+     * @return The date if <code>str</code> is a valid date string
+     * by the default locale settings.
+     * @throws ParseException if not a valid date string
      */
-    public static Date createDate(final String str)
+    public static Date createDate(final String str) throws ParseException
     {
-        throw new UnsupportedOperationException("Not yet implemented");
+        try
+        {
+            return DateFormat.getInstance().parse(str);
+        }
+        catch (java.text.ParseException e)
+        {
+            throw new ParseException("Unable to parse the Date (by the default locale settings): " + str);
+        }
     }
 
     /**
